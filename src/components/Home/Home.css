@@ -1,0 +1,92 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.container-main {
+    max-width: 450px;
+    width: 90%;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 40px;
+}
+
+.rule-card {
+    border: none;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.rule-icon {
+    color: #FF7F00;
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.rule-content h5 {
+    font-weight: bold;
+    color: #212529;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.rule-content p {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.rule-content a {
+    color: #FF7F00;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-continue {
+    background-color: #FF7F00;
+    border-color: #FF7F00;
+    color: white;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 15px rgba(255, 127, 0, 0.2);
+    z-index: 1000;
+}
+
+.btn-continue:hover {
+    background-color: #e67300;
+    border-color: #e67300;
+}

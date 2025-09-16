@@ -1,0 +1,103 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+}
+
+.signup-container {
+    max-width: 450px;
+    width: 90%;
+    padding: 0 20px;
+}
+.signup-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 10px;
+}
+.signup-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 40px;
+}
+.btn-orange {
+    background-color: #FF7F00;
+    border-color: #FF7F00;
+    color: white;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 15px rgba(255, 127, 0, 0.2);
+}
+.btn-orange:hover {
+    background-color: #e67300;
+    border-color: #e67300;
+}
+.btn-outline-orange {
+    color: #FF7F00;
+    border-color: #FF7F00;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 100%;
+    margin-top: 20px;
+}
+.btn-outline-orange:hover {
+    background-color: #FF7F00;
+    color: white;
+}
+.or-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #6c757d;
+    margin: 40px 0;
+}
+.or-divider::before,
+.or-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e9ecef;
+    margin: 0 10px;
+}
+.social-login-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+.social-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+.social-icon-wrapper:hover {
+    border-color: #adb5bd;
+}
+.social-icon {
+    width: 30px;
+    height: 30px;
+}
+.footer-link {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1rem;
+}
+.footer-link a {
+    color: #FF7F00;
+    text-decoration: none;
+    font-weight: bold;
+}

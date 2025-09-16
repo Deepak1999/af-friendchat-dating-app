@@ -1,0 +1,98 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+}
+
+.container-main {
+    max-width: 450px;
+    width: 90%;
+    padding: 0 20px;
+}
+
+.page-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 30px;
+}
+
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.country-code-dropdown {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-right: 15px;
+    border-right: 1px solid #dee2e6;
+    margin-right: 15px;
+}
+
+.country-flag {
+    font-size: 1.5rem;
+    /* Larger emoji flag */
+    margin-right: 5px;
+}
+
+.country-code {
+    font-weight: bold;
+    color: #212529;
+}
+
+.phone-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 1.1rem;
+    color: #212529;
+}
+
+.phone-input::placeholder {
+    color: #adb5bd;
+}
+
+.info-text {
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+.info-text a {
+    color: #FF7F00;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.info-text a:hover {
+    text-decoration: underline;
+}
+
+.btn-continue {
+    background-color: #FF7F00 !important;
+    border-color: #FF7F00;
+    color: white !important;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 15px rgba(255, 127, 0, 0.2);
+}
+
+.btn-continue:hover {
+    background-color: #e67300;
+    border-color: #e67300;
+}
