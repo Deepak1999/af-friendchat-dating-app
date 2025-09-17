@@ -1,12 +1,22 @@
 import React from 'react'
 import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const navigate = useNavigate();
+
+    const handleContinue = () => {
+        navigate('/');
+    };
+
     return (
         <div className="login-container">
+            <div className="back-button">
+                <i className="bi bi-chevron-left" onClick={handleContinue}></i>
+            </div>
             <h1 className="login-title">Log in</h1>
             <h3 className="login-subtitle">Sign in using your email to continue us</h3>
-
             <form>
                 <div className="mb-4">
                     <label for="email" className="form-label">Your email</label>

@@ -1,0 +1,84 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+.signup-container {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.signup-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 10px;
+}
+
+.signup-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 40px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 15px 20px;
+    border: 1px solid #dee2e6;
+    font-size: 1.1rem;
+    height: auto;
+    color: #212529;
+}
+
+.form-control::placeholder {
+    color: #adb5bd;
+}
+
+.btn-signup {
+    background-color: #FF7F00;
+    border-color: #FF7F00;
+    color: white;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 15px rgba(255, 127, 0, 0.2);
+}
+
+.btn-signup:hover {
+    background-color: #e67300;
+    border-color: #e67300;
+}
+
+
+.back-button {
+    width: 64px;
+    height: 64px;
+    border: 2px solid #e8e6eb;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.back-button:hover {
+    background-color: #f9f9f9;
+}
+
+.back-button i {
+    font-size: 24px;
+    color: #ff6a00;
+    /* Bright orange */
+}

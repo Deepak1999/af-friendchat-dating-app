@@ -1,11 +1,21 @@
 import React from 'react'
 import './Mobile.css';
+import { useNavigate } from 'react-router-dom';
 
 const Mobile = () => {
+
+    const navigate = useNavigate();
+
+    const handleContinue = () => {
+        navigate('/signup');
+    };
+
     return (
         <div className="container-main">
+            <div className="back-button">
+                <i className="bi bi-chevron-left" onClick={handleContinue}></i>
+            </div>
             <h4 className="page-title">Can we get your number</h4>
-
             <div className="phone-input-group">
                 <div className="country-code-dropdown">
                     <span className="country-flag">🇮🇳</span>

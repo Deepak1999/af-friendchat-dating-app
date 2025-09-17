@@ -1,12 +1,13 @@
 import './App.css';
-import Login from './components/Login/Login';
-import Email from './components/Signup/Email';
-import Mobile from './components/Signup/Mobile';
-import Signup from './components/Signup/Signup';
-import Welcome from './components/Welcome/Welcome';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import Profile from './components/Profile/Profile';
 import Home from './components/Home/Home';
+import Email from './components/Email_Signup/Email';
+import Mobile from './components/Mobile_Signup/Mobile';
+import Welcome from './components/Welcome/Welcome';
+import Signup from './components/Signup/Signup';
+import Login from './components/Login/Login';
 
 function AppWrapper() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function AppWrapper() {
       <Route path="/login-mobile" element={<Mobile />} />
       <Route path="/login-email" element={<Email />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

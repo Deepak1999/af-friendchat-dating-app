@@ -20,8 +20,15 @@ const Signup = () => {
         navigate('/login-email');
     };
 
+    const handleContinue = () => {
+        navigate('/');
+    };
+
     return (
         <div className="signup-container">
+            <div className="back-button">
+                <i className="bi bi-chevron-left" onClick={handleContinue}></i>
+            </div>
             <h1 className="signup-title">Signup</h1>
             <p className="signup-subtitle">
                 Sign up with your email, phone, or social account to get started.
