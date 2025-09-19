@@ -1,0 +1,158 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.container-main {
+    max-width: 450px;
+    width: 90%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.back-button {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    font-size: 1.5rem;
+    color: #FF7F00;
+    text-decoration: none;
+}
+
+.page-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.otp-input {
+    width: 60px;
+    height: 70px;
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    color: #212529;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+.otp-input.filled {
+    border-color: #FF7F00;
+}
+
+.otp-input:focus {
+    border-color: #FF7F00;
+    box-shadow: 0 0 0 0.25rem rgba(255, 127, 0, 0.25);
+    outline: none;
+}
+
+.btn-continue {
+    background-color: #f0f2f5;
+    border-color: #f0f2f5;
+    color: #adb5bd;
+    padding: 18px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-continue.active {
+    background-color: #FF7F00;
+    border-color: #FF7F00;
+    color: white;
+    box-shadow: 0 8px 15px rgba(255, 127, 0, 0.2);
+}
+
+.resend-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.resend-link p {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.resend-link a {
+    color: #FF7F00;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.keyboard {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    background-color: #f0f2f5;
+    padding: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+.keyboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.key-btn {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.key-btn:active {
+    background-color: #dee2e6;
+}
+
+.key-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #212529;
+    line-height: 1;
+}
+
+.key-letters {
+    font-size: 0.7rem;
+    color: #6c757d;
+    line-height: 1;
+    margin-top: 3px;
+}
+
+.key-backspace i {
+    font-size: 1.5rem;
+    color: #6c757d;
+}

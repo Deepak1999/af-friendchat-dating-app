@@ -79,3 +79,35 @@
 .btn-next:hover {
     background-color: #e67300;
 }
+
+
+
+
+
+.row.two-columns {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option.selected {
+    background-color: #cce5ff;
+    /* border: 2px solid #339af0; */
+    border: 2px solid #FF7F00;
+}
+
+.option-icon {
+    display: inline-block;
+    vertical-align: middle;
+}

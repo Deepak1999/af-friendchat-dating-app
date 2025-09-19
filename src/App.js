@@ -8,6 +8,7 @@ import Mobile from './components/Mobile_Signup/Mobile';
 import Welcome from './components/Welcome/Welcome';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
+import Otp from './components/Mobile_Signup/Otp';
 
 function AppWrapper() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function AppWrapper() {
       <Route path="/login-email" element={<Email />} />
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/m-otp" element={<Otp />} />
     </Routes>
   );
 }

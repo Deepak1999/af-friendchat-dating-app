@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
+import ApiBaseUrl from '../Api_base_Url/ApiBaseUrl';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
+
+    const [partnerOptions, setPartnerOptions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [interestOptions, setInterestOptions] = useState([]);
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -12,7 +19,64 @@ const Profile = () => {
         showGender: false,
         interest: '',
         lookingFor: [],
+        interests: [],
     });
+
+    const fetchPartnerOptions = async () => {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            toast.warning('Access token not found.');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const response = await fetch(`${ApiBaseUrl}/auth-manager/api/utility/v1/partner-looking`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+
+            if (data?.statusDescription?.statusCode === 200) {
+                setPartnerOptions(data.partnerInterestDetails || []);
+            } else {
+                toast.warning(data?.statusDescription?.statusMessage || 'Failed to fetch options.');
+            }
+        } catch (err) {
+            toast.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchInterests = async () => {
+        const token = localStorage.getItem('jwtToken');
+        try {
+            const res = await fetch(`${ApiBaseUrl}/auth-manager/api/utility/v1/interests`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const data = await res.json();
+            if (data?.statusDescription?.statusCode === 200) {
+                setInterestOptions(data.partnerInterestDetails || []);
+            }
+        } catch (err) {
+            console.error('Failed to fetch interests', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPartnerOptions();
+        fetchInterests();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -29,16 +93,24 @@ const Profile = () => {
         }));
     };
 
-    const handleMultiSelect = (value) => {
+    const handleMultiSelect = (field, value) => {
         setFormData((prev) => {
-            const selected = new Set(prev.lookingFor);
+            const selected = new Set(prev[field] || []);
             if (selected.has(value)) {
                 selected.delete(value);
             } else {
                 selected.add(value);
             }
-            return { ...prev, lookingFor: Array.from(selected) };
+            return { ...prev, [field]: Array.from(selected) };
         });
+    };
+
+    const chunkArray = (arr, size) => {
+        const chunks = [];
+        for (let i = 0; i < arr.length; i += size) {
+            chunks.push(arr.slice(i, i + size));
+        }
+        return chunks;
     };
 
     const handleSubmit = (e) => {
@@ -146,27 +218,66 @@ const Profile = () => {
                 <div className="section">
                     <h1 className="title">Who are you looking for?</h1>
                     <p className="subtitle">All good if it changes. There's something for everyone.</p>
+
+                    {loading && <p>Loading options...</p>}
+
                     <div className="row">
-                        {[
-                            '💘 Long-term partner',
-                            '🥰 Long-term open to short',
-                            '🥂 Short-term open to long',
-                            '🥳 Short-term fun',
-                            '👋 New friends',
-                            '🤔 Still figuring it out',
-                        ].map((option) => (
-                            <div
-                                key={option}
-                                className={`option ${formData.lookingFor.includes(option) ? 'selected' : ''}`}
-                                onClick={() => handleMultiSelect(option)}
-                            >
-                                {option}
-                            </div>
-                        ))}
+                        {!loading &&
+                            partnerOptions.map((option) => {
+                                const cleanText = option.text.trim();
+
+                                return (
+                                    <div
+                                        key={option.id}
+                                        className={`option ${formData.lookingFor.includes(cleanText) ? 'selected' : ''}`}
+                                        onClick={() => handleMultiSelect('lookingFor', cleanText)}
+                                    >
+                                        <img
+                                            src={option.iconUrl}
+                                            alt={cleanText}
+                                            className="option-icon"
+                                            style={{ width: 24, height: 24, marginRight: 8 }}
+                                        />
+                                        {cleanText}
+                                    </div>
+                                );
+                            })}
                     </div>
                 </div>
 
-                <button type="submit" className="btn-next">Update Profile</button>
+                <div className="section">
+                    <h1 className="title">Who are you into?</h1>
+                    <p className="subtitle">You like what you like. Now, let everyone know.</p>
+
+                    {loading && <p>Loading options...</p>}
+
+                    {!loading &&
+                        chunkArray(interestOptions, 2).map((row, rowIndex) => (
+                            <div className="row two-columns" key={rowIndex}>
+                                {row.map((option) => {
+                                    const cleanText = option.text.trim();
+
+                                    return (
+                                        <div
+                                            key={option.id}
+                                            className={`option ${formData.interests.includes(cleanText) ? 'selected' : ''}`}
+                                            onClick={() => handleMultiSelect('interests', cleanText)}
+                                        >
+                                            <img
+                                                src={option.iconUrl}
+                                                alt={cleanText}
+                                                className="option-icon"
+                                                style={{ width: 24, height: 24, marginRight: 8 }}
+                                            />
+                                            {cleanText}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        ))}
+                </div>
+
+                <button type="submit" className="btn-next">Update Profile & Continue</button>
 
             </form>
         </div>
