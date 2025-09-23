@@ -57,11 +57,12 @@ const Signup = () => {
                 </div>
             </div> */}
 
-                <div className="footer-link">
-                    Already have an account? <Link to="/login">Log In</Link>
-                </div>
-            </div>
 
+            </div>
+            <div className="footer-link">
+                <span>Already have an account? <Link to="/login">Log In</Link>
+                </span>
+            </div>
         </div>
     );
 };

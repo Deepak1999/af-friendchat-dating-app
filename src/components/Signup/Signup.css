@@ -118,7 +118,7 @@ body {
     position: fixed;
     bottom: 0 !important;
     padding: 26px;
-    left: 44px;
+    /* left: 44px; */
 }
 
 .footer-link a {
@@ -193,7 +193,10 @@ body {
         position: fixed;
         bottom: 0 !important;
         padding: 26px;
-        left: 30px;
+        /* left: 30px; */
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
     .phn_btn {
         margin-top: 72px !important;

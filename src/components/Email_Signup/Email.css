@@ -82,3 +82,29 @@ body {
     color: #ff6a00;
     /* Bright orange */
 }
+
+
+
+@media (max-width: 768px) {
+    .signup-container.email {
+        margin: 0 !important;
+    }
+
+    .sign_content.email {
+        margin-top: 115px;
+    }
+
+    .email_signup {
+        position: fixed;
+        width: 90%;
+        bottom: 0;
+        padding: 20px;
+    }
+
+    .btn-signup.email {
+        padding: 10px 0;
+        color: white !important;
+    }
+
+
+}

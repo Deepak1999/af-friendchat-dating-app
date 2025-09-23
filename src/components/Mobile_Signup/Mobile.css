@@ -8,10 +8,17 @@ body {
     padding-top: 50px;
 }
 
-.container-main {
-    max-width: 450px;
-    width: 90%;
-    padding: 0 20px;
+.container-main.mobile {
+    max-width: unset !important;
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sign_content.mobile {
+    margin-top: 125px;
 }
 
 .page-title {
@@ -95,4 +102,38 @@ body {
 .btn-continue:hover {
     background-color: #e67300;
     border-color: #e67300;
+}
+
+
+
+@media (max-width:768px) {
+    .page-title.mobile {
+        font-size: 32px;
+        text-align: start;
+    }
+
+    .container-main.mobile {
+        max-width: unset !important;
+        width: 100% !important;
+        padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .sign_content.mobile {
+        margin-top: 135px;
+    }
+
+    .info-text {
+        font-size: 18px;
+        text-align: justify;
+
+    }
+
+    .btn-continue.mobile {
+        width: 90%;
+    }
+
+
 }
