@@ -277,6 +277,74 @@ const Profile = () => {
                         ))}
                 </div>
 
+                <h1 class="page-title">Add your recent pics</h1>
+                <p class="page-subtitle">Upload 2 photos to start. Add 4 or more to make your profile stand out.</p>
+                <div class="photo-grid">
+                    <div class="photo-box">
+                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User uploaded photo" />
+                        <span class="remove-icon-box">&times;</span>
+                    </div>
+
+                    <div class="photo-box">
+                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User uploaded photo" />
+                        <span class="remove-icon-box">&times;</span>
+                    </div>
+
+                    <div class="photo-box">
+                        <div class="photo-overlay">
+                            <i class="far fa-image add-icon-main"></i>
+                        </div>
+                        <div class="add-icon-box">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+
+                    <div class="photo-box">
+                        <div class="photo-overlay">
+                            <i class="far fa-image add-icon-main"></i>
+                        </div>
+                        <div class="add-icon-box">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+
+                    <div class="photo-box">
+                        <div class="photo-overlay">
+                            <i class="far fa-image add-icon-main"></i>
+                        </div>
+                        <div class="add-icon-box">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+
+                    <div class="photo-box">
+                        <div class="photo-overlay">
+                            <i class="far fa-image add-icon-main"></i>
+                        </div>
+                        <div class="add-icon-box">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-main">
+                    {/* <div class="location-graphic">
+                        <img src="https://i.ibb.co/L50Hk2H/location-pin.png" alt="Location Pin" class="main-pin" />
+                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User 1" class="user-avatar avatar-1" />
+                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User 2" class="user-avatar avatar-2" />
+                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User 3" class="user-avatar avatar-3" />                        <div class="dotted-circle">
+
+                        </div>
+                    </div> */}
+                    <h1 class="page-title">So, are you from around here?</h1>
+                    <p class="page-subtitle">Set your location to see who's in your neighborhood or beyond. You won't be able to match with people otherwise.</p>
+
+                </div>
+                <div class="d-grid w-90 px-3" style={{ maxWidth: '450px' }}>
+                    <button class="btn btn-allow">Allow</button>
+                    <a href="#" class="learn-more-link">Learn more</a>
+                </div>
+
                 <button type="submit" className="btn-next">Update Profile & Continue</button>
 
             </form>
