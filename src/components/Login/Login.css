@@ -104,8 +104,8 @@ body {
 }
 
 .btn-login {
-    background-color: #FF7F00;
-    border-color: #FF7F00;
+    background-color: #FF6600;
+    border-color: #FF6600;
     color: white;
     padding: 18px 0;
     font-size: 1.3rem;
@@ -117,6 +117,38 @@ body {
 }
 
 .btn-login:hover {
-    background-color: #e67300;
-    border-color: #e67300;
+    background-color: #FF6600;
+    border-color: #FF6600;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .login-container.login {
+        max-width: unset !important;
+         width: 100%;
+         padding: 0 10px !important;
+    }
+    .sign_content.login {
+        margin-top: 100px;
+        padding: 0 !important;
+    }
+    .login-title.login {
+        font-size: 32px;
+    }
+    .login-subtitle.login {
+        font-size: 18px;
+    }
+    .login-subtitle {
+       margin-bottom: 26px;
+    }
+    .forgot-password-link.login {
+        font-size: 14px;
+
+    }
+    .btn-login.login {
+        padding: 8px 0 !important;
+    }
+
 }
