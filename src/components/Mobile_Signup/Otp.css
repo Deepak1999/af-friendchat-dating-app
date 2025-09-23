@@ -156,3 +156,20 @@ body {
     font-size: 1.5rem;
     color: #6c757d;
 }
+
+
+
+
+@media (max-width: 768px) {
+    .container-main.otp {
+        max-width: unset !important;
+        width: 100%;
+        margin-top: 145px;
+    }
+
+    .page-title.otp {
+        font-size: 32px;
+    }
+
+
+}

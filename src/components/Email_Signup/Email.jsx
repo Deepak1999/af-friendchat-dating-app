@@ -87,10 +87,10 @@ const Email = () => {
                     <div className="d-grid email_signup">
                         <button type="submit" className="btn btn-signup email">Sign Up</button>
                     </div>
-                    
+
                 </form>
 
-                
+
             </div>
         </div>
     );

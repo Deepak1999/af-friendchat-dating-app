@@ -42,8 +42,8 @@ body {
 }
 
 .btn-signup {
-    background-color: #FF7F00;
-    border-color: #FF7F00;
+    background-color: #ff6600;
+    border-color: #ff6600;
     color: white;
     padding: 18px 0;
     font-size: 1.3rem;
@@ -55,8 +55,8 @@ body {
 }
 
 .btn-signup:hover {
-    background-color: #e67300;
-    border-color: #e67300;
+    background-color: #ff6600;
+    border-color: #ff6600;
 }
 
 
