@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Welcome.css';
+import wlcmDash from '../Images/message_dash.png'
 
 const Welcome = () => {
     const navigate = useNavigate();
@@ -10,25 +11,28 @@ const Welcome = () => {
     };
 
     return (
-        <div className="welcome-content">
-            <div className="logo-container">
-                <div className="logo-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M416 0C461.7 0 512 40.33 512 96V320C512 375.7 461.7 416 416 416H160L0 512V96C0 40.33 40.33 0 96 0H416z" />
-                    </svg>
-                </div>
-                <div className="logo-text">
-                    <div className="orange-brand">
-                        orange<sup style={{ fontSize: "0.6em", verticalAlign: "super" }}>TM</sup>
+        <div className='container first'>
+            <div className="welcome-content">
+                <div className="logo-container">
+                    <div className="logo-icon">
+                        {/* <svg xmlns={wlcmDash} viewBox="0 0 512 512">
+                            <path d="{wlcmDash}" />
+                        </svg> */}
+                        <img src={wlcmDash} className='img-fluid'></img>
                     </div>
-                    <div className="friendz-chat">Friendz Chat</div>
+                    <div className="logo-text">
+                        <div className="orange-brand">
+                            orange<sup style={{ fontSize: "10px", verticalAlign: "super" }}>TM</sup>
+                        </div>
+                        <div className="friendz-chat">Friendz Chat</div>
+                    </div>
                 </div>
-            </div>
 
-            <div className="bottom-button">
-                <button onClick={handleContinue}>Continue</button>
-            </div>
+                <div className="bottom-button">
+                    <button onClick={handleContinue}>Continue</button>
+                </div>
 
+            </div>
         </div>
     );
 };

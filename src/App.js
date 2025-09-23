@@ -13,17 +13,17 @@ import Otp from './components/Mobile_Signup/Otp';
 function AppWrapper() {
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      document.body.style.backgroundColor = '#FF7F00';
-    } else {
-      document.body.style.backgroundColor = 'white';
-    }
+  // useEffect(() => {
+  //   if (location.pathname === '/') {
+  //     document.body.style.backgroundColor = '#FF7F00';
+  //   } else {
+  //     document.body.style.backgroundColor = 'white';
+  //   }
 
-    return () => {
-      document.body.style.backgroundColor = '';
-    };
-  }, [location]);
+  //   return () => {
+  //     document.body.style.backgroundColor = '';
+  //   };
+  // }, [location]);
 
   return (
     <Routes>

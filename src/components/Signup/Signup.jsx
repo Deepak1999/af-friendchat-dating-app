@@ -29,19 +29,21 @@ const Signup = () => {
             <div className="back-button">
                 <i className="bi bi-chevron-left" onClick={handleContinue}></i>
             </div>
-            <h1 className="signup-title">Signup</h1>
-            <p className="signup-subtitle">
-                Sign up with your email, phone, or social account to get started.
-            </p>
+            <div className='sign_content'>
+                <h1 className="signup-title">Signup</h1>
+                <p className="signup-subtitle mt-4">
+                    Sign up with your email, phone, or social account to get started.
+                </p>
 
-            <div className="d-grid mb-3">
-                <button onClick={handlePhoneClick} className="btn btn-orange">Use phone number</button>
-            </div>
-            <div className="d-grid mb-3">
-                <button onClick={handleEmailClick} className="btn btn-outline-orange">Continue with email</button>
-            </div>
+                <div className="d-grid mb-3 phn_btn">
+                    <button onClick={handlePhoneClick} className="btn btn-orange">Use phone number</button>
+                </div>
+                <div className="d-grid mb-3">
+                    <button onClick={handleEmailClick} className="btn btn-outline-orange">Continue with email</button>
+                </div>
 
-            {/* <div className="or-divider">or sign up with</div>
+
+                {/* <div className="or-divider">or sign up with</div>
 
             <div className="social-login-buttons">
                 <div className="social-icon-wrapper">
@@ -55,8 +57,9 @@ const Signup = () => {
                 </div>
             </div> */}
 
-            <div className="footer-link">
-                Already have an account? <Link to="/login">Log In</Link>
+                <div className="footer-link">
+                    Already have an account? <Link to="/login">Log In</Link>
+                </div>
             </div>
 
         </div>

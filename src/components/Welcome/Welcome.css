@@ -1,12 +1,22 @@
 body {
-    background-color: #FF7F00;
+    /* background-color: #FF7F00; */
     font-family: Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
+    padding: 0 !important;
     overflow: hidden;
+}
+.container.first {
+    background-color: #ff6600 !important;
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .welcome-content {
@@ -75,14 +85,14 @@ body {
 
 .bottom-button {
     margin-top: auto;
-    padding: 20px 0;
+    padding: 40px 0;
     text-align: center;
 }
 
 .bottom-button button {
-    background-color: rgb(214, 142, 9);
-    color: white;
-    padding: 12px 24px;
+    background-color: #fff;
+    color: #ff6600;
+    padding: 12px 62px;
     font-size: 20px;
     font-weight: bold;
     border: none;
@@ -91,6 +101,17 @@ body {
     transition: background-color 0.3s ease;
 }
 
+
 .bottom-button button:hover {
-    background-color: darkorange;
+    background-color: #fff;
+    color: #ff6600;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .container.first {
+        width: 100%;
+    } 
 }
