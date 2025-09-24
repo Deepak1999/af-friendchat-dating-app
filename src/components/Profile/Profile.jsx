@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import ApiBaseUrl from '../Api_base_Url/ApiBaseUrl';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -16,18 +16,84 @@ const Profile = () => {
         day: '',
         month: '',
         year: '',
+        mobileNumber: '',
         gender: '',
         showGender: false,
         interest: '',
         interests: [],
         lookingFor: [],
-        userImages: []
+        userImages: [],
+        location: null
     });
 
     const navigate = useNavigate();
 
     const handleContinue = () => {
         navigate('/home');
+    };
+
+    const getLocationName = async (latitude, longitude) => {
+        try {
+            const res = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            );
+            const data = await res.json();
+            return data.display_name;
+        } catch (err) {
+            console.error("Reverse geocoding failed", err);
+            return '';
+        }
+    };
+
+    const handleAllowLocation = async () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    const locationName = await getLocationName(latitude, longitude);
+
+                    setFormData((prev) => ({
+                        ...prev,
+                        location: locationName
+                    }));
+
+                    toast.success('Location access granted.');
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                    toast.error('Location access denied or unavailable.');
+                }
+            );
+        } else {
+            toast.error('Geolocation is not supported by this browser.');
+        }
+    };
+
+    const getInterestIds = (selectedTexts) => {
+        return interestOptions
+            .filter(opt => selectedTexts.includes(opt.text.trim()))
+            .map(opt => opt.id);
+    };
+
+    const getLookingIds = (selectedTexts) => {
+        return partnerOptions
+            .filter(opt => selectedTexts.includes(opt.text.trim()))
+            .map(opt => opt.id);
+    };
+
+    const handleImageUpload = (e) => {
+        const files = Array.from(e.target.files);
+        setFormData((prev) => ({
+            ...prev,
+            userImages: [...prev.userImages, ...files].slice(0, 6),
+        }));
+    };
+
+    const handleRemoveImage = (indexToRemove) => {
+        setFormData((prev) => ({
+            ...prev,
+            userImages: prev.userImages.filter((_, idx) => idx !== indexToRemove),
+        }));
     };
 
     const fetchPartnerOptions = async () => {
@@ -124,54 +190,62 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem('token');
-        if (!token) {
-            toast.error('No auth token found');
+        const token = localStorage.getItem('jwtToken');
+        const mobileNumber = localStorage.getItem('mobileNumber');
+
+        if (!token || !mobileNumber) {
+            toast.error('Token or mobile number missing');
             return;
         }
 
         const form = new FormData();
 
+        if (formData.location) {
+            form.append('location', formData.location);
+        }
+
         form.append('firstName', formData.firstName);
         form.append('lastName', formData.lastName);
-        form.append('mobileNumber', formData.mobileNumber || '');
-        form.append('dob', `${formData.year}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`);
+        form.append('mobileNumber', mobileNumber);
+        form.append(
+            'dob',
+            `${formData.year}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`
+        );
         form.append('gender', formData.gender);
         form.append('interestedGender', formData.interest);
 
-        // const interestIds = getInterestIds(formData.interests);
-        // const lookingIds = getLookingIds(formData.lookingFor);
+        const interestIds = getInterestIds(formData.interests);
+        const lookingIds = getLookingIds(formData.lookingFor);
 
-        // interestIds.forEach(id => form.append('interestIds', id));
-        // lookingIds.forEach(id => form.append('lookingIds', id));
+        form.append('interestIds', interestIds.join(','));
+        form.append('lookingIds', lookingIds.join(','));
 
         formData.userImages.forEach((imageFile) => {
             form.append('userImages', imageFile);
         });
 
         try {
-            const response = await fetch('https://webapp-api.friendzchat.mobi/auth-manager/api/user/v1/save-user', {
+            const response = await fetch(`${ApiBaseUrl}/auth-manager/api/user/v1/save-user`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    // 'Content-Type': multipart/form-data → DON'T manually set this when using FormData!
+                    Authorization: `Bearer ${token}`,
+                    // No need to manually set Content-Type for FormData
                 },
-                body: form
+                body: form,
             });
 
+            const result = await response.json();
+
             if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Failed to submit form:', errorData);
+                toast.warning(result?.statusDescription?.statusMessage || 'Failed to update profile.');
             } else {
-                const result = await response.json();
-                console.log('Form submitted successfully:', result);
-                // navigate or update UI as needed
+                toast.success(result?.statusDescription?.statusMessage || 'Profile updated successfully!');
+                navigate('/home');
             }
         } catch (err) {
-            console.error('API error:', err);
+            toast.error('Something went wrong while updating the profile.');
         }
     };
-
 
     return (
         <div className='container'>
@@ -204,7 +278,7 @@ const Profile = () => {
                             />
                         </div>
 
-                        <div className="section">
+                        {/* <div className="section">
                             <h1 className="title">Your b-day?</h1>
                             <p className="subtitle">Your profile shows your age, not your birthdate.</p>
                             <div className="date-group">
@@ -235,6 +309,57 @@ const Profile = () => {
                                     onChange={handleChange}
                                     required
                                 />
+                            </div>
+                        </div> */}
+
+                        <div className="section">
+                            <h1 className="title">Your b-day?</h1>
+                            <p className="subtitle">Your profile shows your age, not your birthdate.</p>
+                            <div className="date-group">
+
+                                {/* Day Dropdown */}
+                                <select
+                                    className="input"
+                                    name="day"
+                                    value={formData.day}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Day</option>
+                                    {[...Array(31)].map((_, i) => (
+                                        <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                    ))}
+                                </select>
+
+                                {/* Month Dropdown */}
+                                <select
+                                    className="input"
+                                    name="month"
+                                    value={formData.month}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Month</option>
+                                    {[...Array(12)].map((_, i) => (
+                                        <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                    ))}
+                                </select>
+
+                                {/* Year Dropdown */}
+                                <select
+                                    className="input"
+                                    name="year"
+                                    value={formData.year}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Year</option>
+                                    {Array.from({ length: 100 }, (_, i) => {
+                                        const year = new Date().getFullYear() - i;
+                                        return <option key={year} value={year}>{year}</option>;
+                                    })}
+                                </select>
+
                             </div>
                         </div>
 
@@ -337,79 +462,67 @@ const Profile = () => {
                                 ))}
                         </div>
 
-                        <h1 class="page-title home">Add your recent pics</h1>
-                        <p class="page-subtitle home">Upload 2 photos to start. Add 4 or more to make your profile stand out.</p>
-                        <div class="photo-grid mt-3">
-                            <div class="photo-box">
-                                <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User uploaded photo" />
-                                <span class="remove-icon-box">&times;</span>
-                            </div>
+                        <h1 className="page-title home">Add your recent pics</h1>
+                        <p className="page-subtitle home">Upload 2 photos to start. Add 4 or more to make your profile stand out.</p>
+                        <div className="photo-grid mt-3">
+                            {formData.userImages.map((file, index) => (
+                                <div key={index} className="photo-box">
+                                    <img
+                                        src={URL.createObjectURL(file)}
+                                        alt="User uploaded"
+                                    />
+                                    <span className="remove-icon-box" onClick={() => handleRemoveImage(index)}>&times;</span>
+                                </div>
+                            ))}
 
-                            <div class="photo-box">
-                                <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User uploaded photo" />
-                                <span class="remove-icon-box">&times;</span>
-                            </div>
+                            {formData.userImages.length < 6 &&
+                                Array.from({ length: 6 - formData.userImages.length }).map((_, idx) => (
+                                    <div className="photo-box" key={`add-${idx}`} onClick={() => document.getElementById('imageUploadInput').click()}>
+                                        <div className="photo-overlay">
+                                            <i className="far fa-image add-icon-main"></i>
+                                        </div>
+                                        <div className="add-icon-box">
+                                            <i className="fas fa-plus"></i>
+                                        </div>
+                                    </div>
+                                ))
+                            }
 
-                            <div class="photo-box">
-                                <div class="photo-overlay">
-                                    <i class="far fa-image add-icon-main"></i>
-                                </div>
-                                <div class="add-icon-box">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                            </div>
-
-                            <div class="photo-box">
-                                <div class="photo-overlay">
-                                    <i class="far fa-image add-icon-main"></i>
-                                </div>
-                                <div class="add-icon-box">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                            </div>
-
-                            <div class="photo-box">
-                                <div class="photo-overlay">
-                                    <i class="far fa-image add-icon-main"></i>
-                                </div>
-                                <div class="add-icon-box">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                            </div>
-
-                            <div class="photo-box">
-                                <div class="photo-overlay">
-                                    <i class="far fa-image add-icon-main"></i>
-                                </div>
-                                <div class="add-icon-box">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                            </div>
+                            <input
+                                type="file"
+                                id="imageUploadInput"
+                                style={{ display: 'none' }}
+                                multiple
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                            />
                         </div>
 
-                        <div class="container-main two">
-                            {/* <div class="location-graphic">
-                        <img src="https://i.ibb.co/L50Hk2H/location-pin.png" alt="Location Pin" class="main-pin" />
-                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User 1" class="user-avatar avatar-1" />
-                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User 2" class="user-avatar avatar-2" />
-                        <img src="https://images.unsplash.com/photo-1549416568-154c1562b781?q=80&w=1974&auto=format&fit=crop" alt="User 3" class="user-avatar avatar-3" />                        <div class="dotted-circle">
-
+                        <div className="container-main two">
+                            <h1 className="page-title you">So, are you from around here?</h1>
+                            <p className="page-subtitle set">Set your location to see who's in your neighborhood or beyond. You won't be able to match with people otherwise.</p>
                         </div>
-                    </div> */}
-                            <h1 class="page-title you">So, are you from around here?</h1>
-                            <p class="page-subtitle set">Set your location to see who's in your neighborhood or beyond. You won't be able to match with people otherwise.</p>
-
+                        {/* <div className="d-grid w-100 px-3">
+                            <button className="btn btn-allow profile mx-auto">Allow</button>
+                            <a href="#" className="learn-more-link mx-auto">Learn more</a>
+                        </div> */}
+                        <div className="d-grid w-100 px-3">
+                            <button
+                                type="button"
+                                className="btn btn-allow profile mx-auto"
+                                onClick={handleAllowLocation}
+                            >
+                                Allow
+                            </button>
+                            <a href="#" className="learn-more-link mx-auto">Learn more</a>
                         </div>
-                        <div class="d-grid w-100 px-3">
-                            <button class="btn btn-allow profile mx-auto">Allow</button>
-                            <a href="#" class="learn-more-link mx-auto">Learn more</a>
-                        </div>
-                        <div class="d-grid w-100 px-3">
+                        <div className="d-grid w-100 px-3">
                             <button type="submit" className="btn btn-profile mx-auto">Update Profile & Continue</button>
                         </div>
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
