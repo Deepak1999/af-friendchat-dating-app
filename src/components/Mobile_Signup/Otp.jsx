@@ -83,45 +83,44 @@ const Otp = () => {
     };
 
     return (
-        <div className='container' style={{height: "100vh"}}>
-        <div className="container-main otp">
-            <div className="back-button">
-                <i className="bi bi-chevron-left" onClick={handleBackContinue}></i>
-            </div>
-            <h3 className="page-title otp">Enter your code</h3>
+        <div className='container' style={{ height: "100vh" }}>
+            <div className="container-main otp">
+                <div className="back-button">
+                    <i className="bi bi-chevron-left" onClick={handleBackContinue}></i>
+                </div>
+                <h3 className="page-title otp">Enter your code</h3>
 
-            <div className="otp-inputs">
-                {otp.map((digit, index) => (
-                    <input
-                        key={index}
-                        type="text"
-                        className="otp-input"
-                        maxLength="1"
-                        value={digit}
-                        onChange={(e) => handleChange(index, e.target.value)}
-                        onKeyDown={(e) => handleKeyDown(e, index)}
-                        ref={(el) => inputRefs.current[index] = el}
-                    />
-                ))}
-            </div>
+                <div className="otp-inputs">
+                    {otp.map((digit, index) => (
+                        <input
+                            key={index}
+                            type="text"
+                            className="otp-input"
+                            maxLength="1"
+                            value={digit}
+                            onChange={(e) => handleChange(index, e.target.value)}
+                            onKeyDown={(e) => handleKeyDown(e, index)}
+                            ref={(el) => inputRefs.current[index] = el}
+                        />
+                    ))}
+                </div>
 
+                <div className="resend-link">
+                    <p>Didn't get anything? No worries, let's try again.</p>
+                    <a href="#" onClick={handleResend}>Resend</a>
+                </div>
+
+            </div>
             <div className="d-grid email_signup">
                 <button
-                    className="btn btn-continue"
+                    className="btn btn-continue mobile"
                     disabled={otp.some(d => d === '')}
                     onClick={handleContinue}
                 >
                     Verify OTP & Continue
                 </button>
             </div>
-
-            <div className="resend-link">
-                <p>Didn't get anything? No worries, let's try again.</p>
-                <a href="#" onClick={handleResend}>Resend</a>
-            </div>
-
             <ToastContainer />
-        </div>
         </div>
     );
 };

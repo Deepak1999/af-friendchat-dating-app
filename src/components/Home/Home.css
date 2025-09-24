@@ -90,3 +90,54 @@ body {
     background-color: #e67300;
     border-color: #e67300;
 }
+
+
+
+@media (max-width: 768px) {
+    .sign_content.home {
+        padding: 0 !important;
+        margin-top: 100px;
+    }
+
+    .sign_content.home h1 {
+        font-size: 32px;
+        text-align: start;
+        margin-bottom: 13px;
+    }
+
+    .page-subtitle.home {
+        font-size: 18px;
+        text-align: start;
+        margin-bottom: 15px;
+    }
+
+    .rule-icon {
+        color: #FF6600;
+        font-size: 16px;
+    }
+
+
+}
+
+@media (max-width: 376px) {
+    .sign_content.home h1 {
+        font-size: 26px;
+    }
+
+    .page-subtitle.home {
+        font-size: 16px;
+    }
+
+    .rule-content h5 {
+        font-size: 15px;
+    }
+
+    .rule-card {
+        padding: 14px;
+    }
+
+    .rule-content p {
+        font-size: 13px;
+    }
+
+}
