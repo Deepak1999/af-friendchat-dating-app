@@ -9,21 +9,12 @@ import Welcome from './components/Welcome/Welcome';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import Otp from './components/Mobile_Signup/Otp';
+import WlcmHome from './components/WelcomeHome/WlcmHome';
+import Subscription from './components/WelcomeHome/Subscription';
 
 function AppWrapper() {
+
   const location = useLocation();
-
-  // useEffect(() => {
-  //   if (location.pathname === '/') {
-  //     document.body.style.backgroundColor = '#FF7F00';
-  //   } else {
-  //     document.body.style.backgroundColor = 'white';
-  //   }
-
-  //   return () => {
-  //     document.body.style.backgroundColor = '';
-  //   };
-  // }, [location]);
 
   return (
     <Routes>
@@ -35,6 +26,8 @@ function AppWrapper() {
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/m-otp" element={<Otp />} />
+      <Route path="/wlcm-home" element={<WlcmHome />} />
+      <Route path="/subs-plan" element={<Subscription />} />
     </Routes>
   );
 }

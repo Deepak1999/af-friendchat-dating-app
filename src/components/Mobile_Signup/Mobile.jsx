@@ -31,7 +31,7 @@ const Mobile = () => {
 
             if (data?.statusDescription?.statusCode === 200) {
                 localStorage.setItem('transactionId', data.transactionId);
-                localStorage.setItem('mobileNumber', data.mobileNumber); // optional
+                localStorage.setItem('mobileNumber', data.mobileNumber);
 
                 navigate('/m-otp');
             } else {

@@ -67,15 +67,35 @@ const Otp = () => {
 
             const data = await response.json();
 
+            // if (data?.statusDescription?.statusCode === 200) {
+            //     localStorage.setItem('jwtRefreshToken', data.userDetails.userTokenDetails.jwtRefreshToken);
+            //     localStorage.setItem('jwtToken', data.userDetails.userTokenDetails.jwtToken);
+            //     localStorage.setItem('source', data.userDetails.userTokenDetails.source);
+            //     toast.success(data?.statusDescription?.statusMessage || "OTP Verified!");
+            //     navigate('/home');
+            // } else {
+            //     toast.warning(data?.statusDescription?.statusMessage || "Invalid OTP");
+            // }
+
             if (data?.statusDescription?.statusCode === 200) {
-                localStorage.setItem('jwtRefreshToken', data.userDetails.userTokenDetails.jwtRefreshToken);
-                localStorage.setItem('jwtToken', data.userDetails.userTokenDetails.jwtToken);
-                localStorage.setItem('source', data.userDetails.userTokenDetails.source);
+                const { jwtRefreshToken, jwtToken, source } = data.userDetails.userTokenDetails;
+
+                localStorage.setItem('jwtRefreshToken', jwtRefreshToken);
+                localStorage.setItem('jwtToken', jwtToken);
+                localStorage.setItem('source', source);
+
                 toast.success(data?.statusDescription?.statusMessage || "OTP Verified!");
-                navigate('/home');
+
+                if (data.userDetails.userExists) {
+                    navigate('/wlcm-home');
+                } else {
+                    navigate('/home');
+                }
+
             } else {
                 toast.warning(data?.statusDescription?.statusMessage || "Invalid OTP");
             }
+
 
         } catch (error) {
             toast.error("Error verifying OTP:", error);

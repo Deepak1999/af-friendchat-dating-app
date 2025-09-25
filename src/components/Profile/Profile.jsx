@@ -240,7 +240,7 @@ const Profile = () => {
                 toast.warning(result?.statusDescription?.statusMessage || 'Failed to update profile.');
             } else {
                 toast.success(result?.statusDescription?.statusMessage || 'Profile updated successfully!');
-                navigate('/home');
+                navigate('/wlcm-home');
             }
         } catch (err) {
             toast.error('Something went wrong while updating the profile.');
