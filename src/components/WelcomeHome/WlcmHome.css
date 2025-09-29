@@ -1,0 +1,44 @@
+:root {
+    --orange: #ff6600;
+    --nav-inactive: #ccc;
+    --verified-blue: #1DA1F2;
+    --active-green: #38c172;
+}
+
+.text-orange {
+    color: var(--orange);
+}
+
+.bg-orange {
+    background-color: var(--orange);
+}
+
+.text-verified-blue {
+    color: var(--verified-blue);
+}
+
+.bg-active-green {
+    background-color: var(--active-green);
+}
+
+.text-nav-inactive {
+    color: var(--nav-inactive);
+}
+
+.profile-image-filter {
+    filter: brightness(0.75);
+}
+
+.info-gradient {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+}
+
+.icon_right {
+    border: 1px solid #E8E6EA;
+    padding: 13px !important;
+    border-radius: 20px;
+}
+
+.icon_right i {
+    color: #ff6600;
+}

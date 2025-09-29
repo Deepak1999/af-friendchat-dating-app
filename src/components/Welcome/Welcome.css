@@ -32,11 +32,13 @@ body {
 }
 
 .logo-icon {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff6600;
     border: 2px solid white;
-    border-radius: 15px;
-    display: flex;
+    border-radius: 8px;
+    display: flex
+;
     justify-content: center;
     align-items: center;
     margin-right: 15px;
@@ -53,15 +55,18 @@ body {
 }
 
 .logo-text .orange-brand {
-    font-size: 2.2rem;
+    font-size: 32px;
     font-weight: bold;
     line-height: 1;
     margin-bottom: 5px;
+    color: #ff6600;
 }
 
 .logo-text .friendz-chat {
-    font-size: 1.5rem;
+    font-size: 18px;
     line-height: 1;
+    color: #ff6600;
+    font-weight: 600;
 }
 
 .btn-continue {
