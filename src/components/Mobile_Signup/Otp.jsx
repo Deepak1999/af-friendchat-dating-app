@@ -83,6 +83,7 @@ const Otp = () => {
                 localStorage.setItem('jwtRefreshToken', jwtRefreshToken);
                 localStorage.setItem('jwtToken', jwtToken);
                 localStorage.setItem('source', source);
+                localStorage.setItem('userId', data?.userData?.id?.toString());
 
                 toast.success(data?.statusDescription?.statusMessage || "OTP Verified!");
 

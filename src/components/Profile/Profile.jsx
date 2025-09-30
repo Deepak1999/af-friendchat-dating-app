@@ -34,8 +34,7 @@ const Profile = () => {
 
     const getLocationName = async (latitude, longitude) => {
         try {
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
             );
             const data = await res.json();
             return data.display_name;
@@ -229,7 +228,6 @@ const Profile = () => {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    // No need to manually set Content-Type for FormData
                 },
                 body: form,
             });
@@ -240,6 +238,7 @@ const Profile = () => {
                 toast.warning(result?.statusDescription?.statusMessage || 'Failed to update profile.');
             } else {
                 toast.success(result?.statusDescription?.statusMessage || 'Profile updated successfully!');
+                localStorage.setItem('userId', result?.userData?.id?.toString());
                 navigate('/wlcm-home');
             }
         } catch (err) {
