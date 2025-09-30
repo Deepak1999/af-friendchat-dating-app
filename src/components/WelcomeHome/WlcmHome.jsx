@@ -288,7 +288,7 @@ const WlcmHome = () => {
 
             const body = {
                 pageNo: 0,
-                pageSize: 30,
+                pageSize: 20,
             };
 
             const resp = await fetch(`${ApiBaseUrl}/auth-manager/api/user/v1/get-users`,
@@ -366,6 +366,54 @@ const WlcmHome = () => {
             newIndex = (currentUserIndex + 1) % users.length;
         }
         setCurrentUserIndex(newIndex);
+    };
+
+    const handleActionUpdateByButtonClick = async (actionType) => {
+        if (users.length === 0) return;
+
+        if (actionType === 'redo') {
+            const prevIndex = (currentUserIndex - 1 + users.length) % users.length;
+            setCurrentUserIndex(prevIndex);
+            return;
+        }
+
+        const currentUser = users[currentUserIndex];
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('jwtToken');
+
+        if (!userId || !token) {
+            alert('User not authenticated');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${ApiBaseUrl}/auth-manager/api/reaction/v1/add-user-action`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                        userId: userId,
+                    },
+                    body: JSON.stringify({
+                        targetId: currentUser.id,
+                        type: actionType,
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error ${response.status}`);
+            }
+
+            console.log(`Action ${actionType} sent for targetId ${currentUser.id}`);
+            await handleGetuserProfile();
+        } catch (error) {
+            console.error('Failed to send user action:', error);
+        }
+
+        const nextIndex = (currentUserIndex + 1) % users.length;
+        setCurrentUserIndex(nextIndex);
     };
 
     const handleTouchStart = (e) => {
@@ -532,7 +580,7 @@ const WlcmHome = () => {
                 <button
                     id="btn-reject"
                     className="action-btn w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center text-xl text-red-500 hover:scale-105 transition active:scale-95"
-                    onClick={() => handleAction('reject')}
+                    onClick={() => handleActionUpdateByButtonClick('CANCEL')}
                 >
                     <i className="fas fa-times"></i>
                 </button>
@@ -541,7 +589,7 @@ const WlcmHome = () => {
                     id="btn-like"
                     className="action-btn w-14 h-14 rounded-full text-white shadow-xl flex items-center justify-center text-3xl hover:scale-105 transition active:scale-95 bg-orange"
                     style={{ boxShadow: '0 5px 15px rgba(255, 102, 0, 0.4)' }}
-                    onClick={() => handleAction('like')}
+                    onClick={() => handleActionUpdateByButtonClick('LIKE')}
                 >
                     <i className="fas fa-heart"></i>
                 </button>
@@ -549,7 +597,7 @@ const WlcmHome = () => {
                 <button
                     id="btn-superlike"
                     className="action-btn w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center text-xl text-blue-500 hover:scale-105 transition active:scale-95"
-                    onClick={() => handleAction('superlike')}
+                    onClick={() => handleActionUpdateByButtonClick('SUPERLIKE')}
                 >
                     <i className="fas fa-star"></i>
                 </button>
@@ -557,7 +605,7 @@ const WlcmHome = () => {
                 <button
                     id="btn-boost"
                     className="action-btn w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center text-xl text-purple-500 hover:scale-105 transition active:scale-95"
-                    onClick={() => handleAction('boost')}
+                // onClick={() => handleAction('boost')}
                 >
                     <i className="fas fa-bolt"></i>
                 </button>

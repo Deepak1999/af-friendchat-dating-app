@@ -21,10 +21,10 @@ const Welcome = () => {
                         <img src={wlcmDash} className='img-fluid'></img>
                     </div>
                     <div className="logo-text">
-                        <div className="orange-brand">
+                        <div className="orange-brand" style={{ color: "#ffffff" }}>
                             orange<sup style={{ fontSize: "10px", verticalAlign: "super" }}>TM</sup>
                         </div>
-                        <div className="friendz-chat">Friendz Chat</div>
+                        <div className="friendz-chat" style={{ color: "#ffffff" }}>Friendz Chat</div>
                     </div>
                 </div>
 
