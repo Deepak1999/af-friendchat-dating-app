@@ -4,11 +4,24 @@ import './Subscription.css';
 const Subscription = () => {
     return (
         <>
-            <a href="#" className="back-button"><i className="fas fa-chevron-left"></i></a>
-            <div className="container-main">
-                <h1 className="page-title">Discovery Settings</h1>
+            <div>
+                <span>
+                    <a href="#" className="back-button">
+                        <i className="fas fa-chevron-left"></i>
+                    </a>
+                </span>
+                <span style={{ marginLeft: "75px", marginTop: "34px" }}>
+                    <h1 className="page-title" style={{ fontSize: "26px", marginTop: "15px" }}>Discovery Settings</h1>
+                </span>
+            </div>
 
-                <div className="subscription-card subscription-card-platinum">
+            <div className="container-main subscription">
+                <div
+                    className="subscription-card subscription-card-platinum"
+                    style={{
+                        background: 'linear-gradient(86.6deg, #F9F9F9 0.2%, #CFCCEB 99.49%)',
+                    }}
+                >
                     <div className="sub-details">
                         <h5>Friendz Chat<span className="badge badge-platinum">Platinum</span></h5>
                         <small>Priority Likes, See who likes You, and more</small>
@@ -17,7 +30,9 @@ const Subscription = () => {
                         <i className="fas fa-medal"></i>
                     </div>
                 </div>
-                <div className="subscription-card subscription-card-gold">
+                <div className="subscription-card subscription-card-gold w-100" style={{
+                    background: 'linear-gradient(90deg, #DBC68F 0%, #FFFAF2 100%)',
+                }}>
                     <div className="sub-details">
                         <h5>Friendz Chat<span className="badge badge-gold">Gold</span></h5>
                         <small>See Who Likes You & More!</small>
@@ -26,7 +41,9 @@ const Subscription = () => {
                         <i className="fas fa-medal"></i>
                     </div>
                 </div>
-                <div className="subscription-card subscription-card-plus">
+                <div className="subscription-card subscription-card-plus w-100" style={{
+                    background: 'linear-gradient(90deg, #FFF0F0 0%, #DCE6FF 100%)',
+                }}>
                     <div className="sub-details">
                         <h5>Friendz Chat<span className="badge badge-plus">Plus</span></h5>
                         <small>See Who Likes You & More!</small>
@@ -48,18 +65,6 @@ const Subscription = () => {
                             <i className="fas fa-bolt"></i>
                         </div>
                         <h6>Get Boosts</h6>
-                    </div>
-                    <div className="feature-box">
-                        <div className="feature-icon-circle eye">
-                            <i className="fas fa-eye"></i>
-                        </div>
-                        <h6>Go Incognito</h6>
-                    </div>
-                    <div className="feature-box">
-                        <div className="feature-icon-circle plane">
-                            <i className="fas fa-plane"></i>
-                        </div>
-                        <h6>Passport Mode</h6>
                     </div>
                 </div>
             </div>

@@ -66,12 +66,12 @@ function AppWrapper() {
       <Route path="/login" element={<Login />} />
       <Route path="/login-mobile" element={<Mobile />} />
       <Route path="/login-email" element={<Email />} />
+      <Route path="/m-otp" element={<Otp />} />
       
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/m-otp" element={<Otp />} />
         <Route path="/wlcm-home" element={<WlcmHome />} />
         <Route path="/subs-plan" element={<Subscription />} />
       </Route>

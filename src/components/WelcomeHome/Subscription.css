@@ -119,10 +119,11 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-top: 25px;
+    width: 100%;
 }
 
 .feature-box {
-    background-color: #f8f9fa;
+    background-color: #f4f4f4;
     border-radius: 12px;
     padding: 25px 15px;
     text-align: center;
@@ -208,4 +209,11 @@ body {
     font-size: 0.9rem;
     color: #6c757d;
     margin-top: 5px;
+}
+
+.container-main.subscription {
+    max-width: unset !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+    /* display: unset !important; */
 }
