@@ -115,10 +115,12 @@ const Otp = () => {
                     {otp.map((digit, index) => (
                         <input
                             key={index}
-                            type="number"
+                            type="text"
                             className="otp-input"
                             maxLength="1"
                             value={digit}
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             onChange={(e) => handleChange(index, e.target.value)}
                             onKeyDown={(e) => handleKeyDown(e, index)}
                             ref={(el) => inputRefs.current[index] = el}

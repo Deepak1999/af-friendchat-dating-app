@@ -58,7 +58,9 @@ const Mobile = () => {
                         </svg>
                     </div>
                     <input
-                        type="number"
+                        type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         className="phone-input"
                         placeholder="XXXXXXXXXX"
                         value={mobileNumber}
