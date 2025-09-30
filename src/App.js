@@ -1,6 +1,6 @@
 // import './App.css';
-// import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-// import { useEffect } from 'react';
+// import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 // import Profile from './components/Profile/Profile';
 // import Home from './components/Home/Home';
 // import Email from './components/Email_Signup/Email';
@@ -11,23 +11,29 @@
 // import Otp from './components/Mobile_Signup/Otp';
 // import WlcmHome from './components/WelcomeHome/WlcmHome';
 // import Subscription from './components/WelcomeHome/Subscription';
+// import ProtectedRoute from './components/ProtectedRoute';
 
 // function AppWrapper() {
-
-//   const location = useLocation();
-
 //   return (
 //     <Routes>
+//       {/* Public Routes */}
 //       <Route path="/" element={<Welcome />} />
 //       <Route path="/signup" element={<Signup />} />
 //       <Route path="/login" element={<Login />} />
 //       <Route path="/login-mobile" element={<Mobile />} />
 //       <Route path="/login-email" element={<Email />} />
-//       <Route path="/home" element={<Home />} />
-//       <Route path="/profile" element={<Profile />} />
 //       <Route path="/m-otp" element={<Otp />} />
-//       <Route path="/wlcm-home" element={<WlcmHome />} />
-//       <Route path="/subs-plan" element={<Subscription />} />
+
+//       {/* Protected Routes */}
+//       <Route element={<ProtectedRoute />}>
+//         <Route path="/home" element={<Home />} />
+//         <Route path="/profile" element={<Profile />} />
+//         <Route path="/wlcm-home" element={<WlcmHome />} />
+//         <Route path="/subs-plan" element={<Subscription />} />
+//       </Route>
+
+//       {/* Fallback */}
+//       <Route path="*" element={<Navigate to="/" replace />} />
 //     </Routes>
 //   );
 // }
@@ -41,6 +47,7 @@
 // }
 
 // export default App;
+
 
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -56,6 +63,7 @@ import Otp from './components/Mobile_Signup/Otp';
 import WlcmHome from './components/WelcomeHome/WlcmHome';
 import Subscription from './components/WelcomeHome/Subscription';
 import ProtectedRoute from './components/ProtectedRoute';
+import MobileGuard from './components/MobileGuard';
 
 function AppWrapper() {
   return (
@@ -67,7 +75,7 @@ function AppWrapper() {
       <Route path="/login-mobile" element={<Mobile />} />
       <Route path="/login-email" element={<Email />} />
       <Route path="/m-otp" element={<Otp />} />
-      
+
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route path="/home" element={<Home />} />
@@ -77,7 +85,7 @@ function AppWrapper() {
       </Route>
 
       {/* Fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
@@ -85,7 +93,9 @@ function AppWrapper() {
 function App() {
   return (
     <Router>
-      <AppWrapper />
+      <MobileGuard>
+        <AppWrapper />
+      </MobileGuard>
     </Router>
   );
 }

@@ -115,7 +115,7 @@ const Otp = () => {
                     {otp.map((digit, index) => (
                         <input
                             key={index}
-                            type="text"
+                            type="number"
                             className="otp-input"
                             maxLength="1"
                             value={digit}
